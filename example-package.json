@@ -1,0 +1,63 @@
+{
+	"name": "web-server",
+	"version": "1.0.0",
+	"description": "Simple web server, php & mysql",
+	"main": "main.js",
+	"author": "Ayoub Bablil",
+	"keywords": [
+	  "web",
+	  "server",
+	  "php",
+	  "mysql"
+	],
+	"license": "MIT",
+	"devDependencies": {
+	  "@electron/packager": "^18.1.3",
+	  "daisyui": "^4.6.2",
+	  "electron": "^28.2.2",
+	  "tailwindcss": "^3.4.1",
+	  "electron-builder": "^24.12.0"
+	},
+	"scripts": {
+	  "start": "electron .",
+	  "pack:mac": "electron-packager . --platform=darwin --arch=x64 --out=pack --overwrite --asar",
+	  "pack:linux": "electron-packager . --platform=linux --arch=x64 --out=pack --overwrite --asar",
+	  "build:mac": "electron-builder build --mac --x64",
+	  "build:linux": "electron-builder build --linux --x64",
+	  "publish": "electron-builder build --mac --linux --x64 --publish always"
+	},
+	"dependencies": {
+	  "electron-store": "^8.1.0"
+	},
+	"build": {
+	  "appId": "com.nicehalf.web-server",
+	  "productName": "Web Server",
+	  "protocols": {
+		"name": "Web Server",
+		"schemes": [
+		  "webserver"
+		]
+	  },
+	  "mac": {
+		"target": "dmg",
+		"icon": "assets/icons/icon.icns"
+	  },
+	  "linux": {
+		"target": "AppImage",
+		"icon": "assets/icons/icon.png"
+	  },
+	  "directories": {
+		"output": "build/${productName}-${version}-${platform}-${arch}"
+	  },
+	  "publish": [
+		{
+		  "provider": "github",
+		  "owner": "bablilayoub",
+		  "repo": "web-server",
+		  "token": "**********",
+		  "private": false
+		}
+	  ]
+	}
+  }
+  

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline';"
+    />
+    <meta name="page-slug" content="main" />
+    <link rel="stylesheet" href="../assets/css/app.css" />
+    <title>Main</title>
+  </head>
+  <body class="bg-base-200 h-full">
+    <!-- Navbar -->
+    <div class="navbar bg-base-300 px-4">
+      <div class="flex-1">
+        <a class="btn btn-ghost text-xl" id="title">Main</a>
+      </div>
+      <div class="flex-none space-x-2">
+        <div class="tooltip tooltip-bottom" data-tip="Config saved" id="config-tooltip">
+          <button class="btn btn-success btn-square" onclick="saveConfig()" id="save-config" disabled>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="inline-block w-5 h-5 stroke-current"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M5 12l5 5l10 -10" />
+            </svg>
+          </button>
+        </div>
+        <div class="dropdown dropdown-end">
+          <button tabindex="0" role="button" class="btn btn-square btn-info">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              class="inline-block w-5 h-5 stroke-current"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
+              ></path>
+            </svg>
+          </button>
+          <ul
+            tabindex="0"
+            class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-300 rounded-box w-52"
+          >
+            <!-- <li>
+              <a class="justify-between">
+                Check Updates
+                <span class="badge">New</span>
+              </a>
+            </li>
+            <li><a>Settings</a></li> -->
+            <li><a onclick="info_modal.showModal()">Info</a></li>
+            <li><a onclick="quitApp()">Quit</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- End Navbar -->
+
+    <!-- Main Content -->
+    <div class="container mx-auto py-4 h-full w-full space-y-4" id="selecting">
+      <div role="alert" class="alert alert-info">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="stroke-current shrink-0 h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <span
+          >Simple, lightweight, and easy to use , what else do you need?</span
+        >
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title">Select PHP Version</h3>
+            <p class="text-gray-500 text-sm">I know you love PHP, so do I.</p>
+            <div class="form-control space-y-4">
+              <select id="php-version" class="select select-bordered w-full">
+                <option value="8.3">8.3</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title">Select Database Server</h3>
+            <p class="text-gray-500 text-sm">Your database, your choice.</p>
+            <div class="form-control space-y-4">
+              <select
+                id="database-server"
+                class="select select-bordered w-full"
+              >
+                <option value="mysql">MySQL</option>
+                <!-- <option value="mariadb">MariaDB</option>
+                <option value="postgresql">PostgreSQL</option> -->
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title">Server Path</h3>
+            <p class="text-gray-500 text-sm">
+              Where do you want to run the server?
+            </p>
+            <div class="join">
+              <div class="w-full">
+                <div class="w-full">
+                  <input
+                    class="input input-bordered w-full join-item"
+                    placeholder="/path/to/server"
+                    id="server-path"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="indicator">
+                <button
+                  class="btn btn-info join-item"
+                  onclick="openFolderDialog('server-path')"
+                >
+                  Browse
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title">Server Port</h3>
+            <p class="text-gray-500 text-sm">The port you want to use.</p>
+            <div class="form-control space-y-4">
+              <input
+                id="server-port"
+                type="number"
+                class="input input-bordered w-full"
+                placeholder="8080"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="text-center text-sm text-gray-500">
+        If one of the services is not located, it will be installed
+        automatically.
+      </p>
+      <button id="run-server" class="btn btn-block btn-primary">
+        Run Server
+      </button>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Info Modal -->
+    <dialog id="info_modal" class="modal">
+      <div class="modal-box">
+        <h3 class="font-bold text-lg">About</h3>
+        <p class="py-4">
+          This is a simple and lightweight server manager, it's easy to use and
+          it's free. You can select the PHP version and the database server you
+          want to use, and then run the server. It's that simple.
+        </p>
+        <p class="text-gray-400" id="version"></p>
+        <p class="text-gray-400 mt-4">
+          Made with ❤️ by
+          <button
+            class="text-blue-500"
+            onclick="openLink(config.author_github)"
+          >
+            Ayoub Bablil
+          </button>
+          using
+          <button class="text-blue-500" onclick="openLink(config.framework)">
+            Electron
+          </button>
+        </p>
+        <div class="modal-action">
+          <form method="dialog">
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+    <!-- End Info Modal -->
+  </body>
+  <script src="../assets/js/app.js"></script>
+</html>
