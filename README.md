@@ -24,7 +24,7 @@ To use the web server, simply run the executable and specify the directory you w
 The web server can be configured using a simple friendly interface. You can specify the port, the directory to serve files from, and other settings.
 
 ## Acknowledgments
-I would like to thank the creators of the Go programming language for making it easy to create a simple web server. I would also like to thank the creators of the [Electron](https://www.electronjs.org/) framework for making it easy to create a simple and lightweight web server.
+I would like to thank the creators  of the [Electron](https://www.electronjs.org/) framework for making it easy to create a simple and lightweight web server.
 
 also, I would like to thank the creators of tailwindcss & daisyui for making it easy to create a beautiful and responsive web page.
 
